@@ -37,7 +37,7 @@ pipeline{
                         sh 'cd runner-script'
                         sh 'call npm install'
                         sh 'call npm run build'
-                        sh 'call npm run start-nunit ${params.testsToRunConverted} ${params.runnerJarPath} ${params.nunit2} ${params.nunit3} ${suiteId} ${suiteRunId} $github_user $github_password'
+                        sh 'call npm run start-nunit "${params.testsToRunConverted}" "${params.runnerJarPath}" "${params.nunit2}" "${params.nunit3}" ${suiteId} ${suiteRunId} $github_user $github_password'
                         sh 'call command_to_execute.bat'
                         sh 'call java_command_to_execute.bat'
                     }
