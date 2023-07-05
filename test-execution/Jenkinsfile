@@ -37,7 +37,7 @@ pipeline{
                         bat 'cd test-execution'
                         bat 'call npm install'
                         bat 'call npm run build'
-                        bat 'call npm run start-nunit "%testsToRun%" "%runnerJarPath%" %nunit2% %nunit3% %suiteId% %suiteRunId% %github_user% %github_password%'
+                        bat 'call npm run start-nunit "%testsToRun%" "%runnerJarPath%" %suiteId% %suiteRunId% %nunit2% %nunit3% %github_user% %github_password%'
                         bat 'call command_to_execute.bat'
                         bat 'call java_command_to_execute.bat'
                     }
