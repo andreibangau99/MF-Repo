@@ -7,7 +7,7 @@ pipeline{
     }
     parameters {
         string(name: 'testsToRun',description: '' )
-        string(name: 'runnerJarPath', defaultValue: 'C:\\dev\\shift\\silk-central-shift\\execution-wrapper\\target\\octane-shift-execution-wrapper-4.20-SNAPSHOT.jar', description: "")
+        string(name: 'runnerJarPath', defaultValue: 'C:\\dev\\shift\\silk-central-shift\\execution-wrapper\\target\\octane-shift-execution-wrapper-4.21-SNAPSHOT.jar', description: "")
         string(name: 'nunit2',defaultValue: '\"D:\\from C\\myFolder\\nunit\\NUnit-2.7.1\\bin\\nunit-console.exe\"',description: '' )
         string(name: 'nunit3',defaultValue: '\"D:\\from C\\myFolder\\netcoreapp3.1\\Nunit\\nunit3-console.exe\"' )
         string(name: 'suiteId',description: '' )
@@ -37,7 +37,7 @@ pipeline{
                         bat 'cd test-execution'
                         bat 'call npm install'
                         bat 'call npm run build'
-                        bat 'call npm run start-nunit $env.testsToRun params.runnerJarPath $params.nunit2 $params.nunit3 $params.suiteId $params.suiteRunId env.github_user $env.github_password'
+                        bat 'call npm run start-nunit $testsToRun $runnerJarPath $params.nunit2 $params.nunit3 $params.suiteId $params.suiteRunId $params.github_user $params.github_password'
                         bat 'call command_to_execute.bat'
                         bat 'call java_command_to_execute.bat'
                     }
