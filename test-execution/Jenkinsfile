@@ -34,7 +34,7 @@ pipeline{
                 script {
                     withCredentials([usernamePassword(credentialsId: 'AndreiSVN', usernameVariable: 'github_user', passwordVariable: 'github_password')]) {
                         bat 'echo START'
-                        bat 'cd test-execution'
+                        bat 'call cd test-execution'
                         bat 'call npm install'
                         bat 'call npm run build'
                         bat 'call npm run start-nunit "%testsToRun%" "%runnerJarPath%" %suiteId% %suiteRunId% %nunit2% %nunit3% %github_user% %github_password%'
