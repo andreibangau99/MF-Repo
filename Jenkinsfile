@@ -45,7 +45,9 @@ pipeline{
             }
 
         }
-        post {
+        
+    }
+    post {
             failure {
                 cleanWs()
             }
@@ -58,6 +60,5 @@ pipeline{
                 cleanWs()
             }
         }
-    }
 
 }
