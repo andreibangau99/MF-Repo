@@ -33,13 +33,13 @@ pipeline{
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'AndreiSVN', usernameVariable: 'github_user', passwordVariable: 'github_password')]) {
-                        sh 'echo START'
-                        sh 'cd test-execution'
-                        sh 'call npm install'
-                        sh 'call npm run build'
-                        sh 'call npm run start-nunit ${params.testsToRunConverted} ${params.runnerJarPath} ${params.nunit2} ${params.nunit3} ${suiteId} ${suiteRunId} $github_user $github_password'
-                        sh 'call command_to_execute.bat'
-                        sh 'call java_command_to_execute.bat'
+                        bat 'echo START'
+                        bat 'cd test-execution'
+                        bat 'call npm install'
+                        bat 'call npm run build'
+                        bat 'call npm run start-nunit ${params.testsToRunConverted} ${params.runnerJarPath} ${params.nunit2} ${params.nunit3} ${suiteId} ${suiteRunId} $github_user $github_password'
+                        bat 'call command_to_execute.bat'
+                        bat 'call java_command_to_execute.bat'
                     }
                 }
             }
