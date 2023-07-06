@@ -50,6 +50,8 @@ pipeline{
     }
     post {
                 failure {
+                    archiveArtifacts artifacts: 'test-execution/java_command_to_execute.bat,test-execution/command_to_execute.bat,test-execution/testResults/*xml', onlyIfSuccessful: true
+                    junit allowEmptyResults: true, testResults: 'test-execution/testResults/*xml'
                     cleanWs()
                     bat 'echo fail'
                 }
