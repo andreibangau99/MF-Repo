@@ -39,13 +39,10 @@ pipeline{
                             bat 'call npm run start-nunit "%testsToRun%" "%runnerJarPath%" %suiteId% %suiteRunId% %nunit2% %nunit3% %github_user% %github_password%'
                             try {
                                 bat 'call command_to_execute.bat'
-                                bat 'call java_command_to_execute.bat'
                             } catch(err) {
-                                bat 'call java_command_to_execute.bat'
+                                bat 'echo Tests failed! Continue...'
                             }
-                            
-                            bat 'call echo cmdtoex'
-                            
+                            bat 'call java_command_to_execute.bat'
                         }
                         
                     }
