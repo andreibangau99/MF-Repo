@@ -51,6 +51,7 @@ pipeline{
     post {
                 failure {
                     cleanWs()
+                    bat 'echo fail'
                 }
                 success {
                     archiveArtifacts artifacts: 'test-execution/java_command_to_execute.bat,test-execution/command_to_execute.bat,test-execution/testResults/*xml', onlyIfSuccessful: true
@@ -59,6 +60,7 @@ pipeline{
                 }
                 aborted {
                     cleanWs()
+                    bat 'echo abort'
                 }
             }
 
