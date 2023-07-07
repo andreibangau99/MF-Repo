@@ -425,6 +425,7 @@ export {
     getPredefinedParameters,
     getTestParameters,
     getTestNames,
+    getOctaneListNodesAsString,
     ROOT_SOURCES_FOLDER,
     TEST_RESULT_FILE,
     EXECUTABLE_FILE

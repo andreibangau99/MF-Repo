@@ -349,6 +349,41 @@ const getOctaneListNodesFromIds = async (
     return <OctaneListNode[]>(octaneResponse.data);
 }
 
+const getPEOctaneTestByName = async (
+    testName: string
+): Promise<OctaneTest> => {
+    let query;
+    query = Query.field('name')
+        .equal(testName)
+        .and(Query.field('class_name').equal(Query.NULL))
+        .and(Query.field('package').equal(Query.NULL))
+        .and(Query.field('component').equal(Query.NULL));
+    const octaneResponse = await octane
+        .get(Octane.entityTypes.tests)
+        .fields(
+            'name',
+            'sc_exec_keywords_udf',
+            'application_modules',
+            'attachments'
+        )
+        .query(query.build())
+        .execute();
+    if (octaneResponse.data[0] === undefined) {
+        throw new Error(
+            `Not found! Automated test with name ${testName} does not exist in Octane.`
+        );
+    }
+    return <OctaneTest>{
+        ...octaneResponse.data[0],
+        attachments: <OctaneAttachment[]>(
+            octaneResponse.data[0].attachments.data
+        ),
+        application_modules: <OctaneApplicationModule[]>(
+            octaneResponse.data[0].application_modules.data
+        )
+    };
+};
+
 const validateOctaneTest = (test: OctaneTest, testName: string): void => {
     if (!test) {
         throw new Error(
@@ -397,4 +432,5 @@ export {
     getAttachmentContentById,
     getOctaneKDTByName,
     getTestSuiteById,
+    getPEOctaneTestByName
 };
