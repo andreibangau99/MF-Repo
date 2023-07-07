@@ -28,6 +28,7 @@ pipeline{
                     script {
                         agentLabel =$('npm run start-pe %suiteId%') 
                     }
+                    bat 'echo %agentLabel%'
                 }
                 
             }
