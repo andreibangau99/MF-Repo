@@ -18,7 +18,7 @@ import {
     getPEOctaneTestByName, getTestSuiteById
 } from '../utils/octaneClient.js';
 import {
-    cleanUpWorkingFiles, getOctaneListNodesAsString, getTestNames,
+    cleanUpWorkingFiles, EXECUTABLE_FILE, getOctaneListNodesAsString, getTestNames,
     TEST_RESULT_FILE
 } from '../utils/files.js';
 import OctaneTestSuite from "../model/octane/octaneTestSuite";
@@ -40,5 +40,5 @@ const getExecutionKeywords = async (
 const testSuiteId = process.argv[2];
 
 getExecutionKeywords(testSuiteId)
-    .then((kwds) => process.stdout.write(kwds))
+    .then((kwds) => fs.appendFileSync("keywords.txt", kwds))
     .catch(err => console.error(err.message, err));
