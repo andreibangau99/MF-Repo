@@ -19,10 +19,16 @@ pipeline{
     stages {
 
         stage('setTag') {
+            
             steps {
-                script {
-                    agentLabel = bat(script: "echo myTag1", returnStdout: true).trim().readLines().drop(1).join(" ")
+                dir('test-execution') {
+                    bat 'call npm install'
+                    bat 'call npm run build'
+                    script {
+                        agentLabel = bat(script: "call npm run start-pe %suiteId%", returnStdout: true).trim().readLines().drop(1).join(" ")
+                    }
                 }
+                
             }
         }
 
@@ -34,8 +40,6 @@ pipeline{
                 script {
                     withCredentials([usernamePassword(credentialsId: 'AndreiSVN', usernameVariable: 'github_user', passwordVariable: 'github_password')]) {
                         dir('test-execution') {
-                            bat 'call npm install'
-                            bat 'call npm run build'
                             bat 'call npm run start-nunit "%testsToRun%" "%runnerJarPath%" %suiteId% %suiteRunId% %nunit2% %nunit3% %github_user% %github_password%'
                             try {
                                 bat 'call command_to_execute.bat'
