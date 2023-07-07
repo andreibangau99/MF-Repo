@@ -22,11 +22,11 @@ pipeline{
             
             steps {
                 dir('test-execution') {
-                    bat 'call npm install'
-                    bat 'call npm run build'
-                    bat 'call echo LABEL'
+                    bat 'npm install'
+                    bat 'npm run build'
+                    bat 'echo LABEL'
                     script {
-                        agentLabel = bat(script: "call npm run start-pe %suiteId%", returnStdout: true).trim().readLines().drop(1).join(" ")
+                        agentLabel =$('npm run start-pe %suiteId%') 
                     }
                 }
                 
