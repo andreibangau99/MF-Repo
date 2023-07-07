@@ -8,7 +8,8 @@
     "build": "tsc",
     "start": "node dist/junit.js",
     "start-nunit": "node dist/nunit.js",
-    "start-kdt": "node dist/kdt.js"
+    "start-kdt": "node dist/kdt.js",
+    "start-pe": "node dist/processExecutor/procExec.js"
   },
   "keywords": [],
   "author": "",
