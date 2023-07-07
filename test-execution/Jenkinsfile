@@ -27,7 +27,7 @@ pipeline{
                     script {
                           agentLabel = bat(script: "call npm run start-pe %suiteId%", returnStdout: true).trim()
                     }
-                    bat "echo ${agentLabel}"
+                    bat 'echo ${agentLabel}'
                 }
                 
             }
