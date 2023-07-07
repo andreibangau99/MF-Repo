@@ -25,7 +25,7 @@ pipeline{
                     bat 'npm install'
                     bat 'npm run build'
                     script {
-                         agentLabel = bat(script: "npm run start-pe %suiteId%", returnStdout: true).trim()
+                         agentLabel = bat(script: "call npm run start-pe %suiteId%", returnStdout: true).trim()
                     }
                     bat "echo ${agentLabel}"
                 }
