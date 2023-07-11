@@ -40,7 +40,7 @@ pipeline{
             }
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'AndreiSVN', usernameVariable: 'github_user', passwordVariable: 'github_password')]) {
+                    withCredentials([usernamePassword(credentialsId: '10b2861f-e324-43d7-9967-2a369a21bf43', usernameVariable: 'github_user', passwordVariable: 'github_password')]) {
                         dir('test-execution') {
                             bat 'npm install'
                             bat 'npm run build'
