@@ -7,7 +7,7 @@ pipeline{
     }
     parameters {
         string(name: 'testsToRun',description: '' )
-        string(name: 'runnerJarPath', defaultValue: 'C:\\dev\\shift\\silk-central-shift\\execution-wrapper\\target\\octane-shift-execution-wrapper-4.21-SNAPSHOT.jar', description: "")
+        string(name: 'runnerJarPath', defaultValue: 'C:\\dev\\shift\\silk-central-shift\\execution-wrapper\\target\\octane-shift-execution-wrapper-4.22-SNAPSHOT.jar', description: "")
         string(name: 'nunit2',defaultValue: '\"D:\\from C\\myFolder\\nunit\\NUnit-2.7.1\\bin\\nunit-console.exe\"',description: '' )
         string(name: 'nunit3',defaultValue: '\"D:\\from C\\myFolder\\netcoreapp3.1\\Nunit\\nunit3-console.exe\"' )
         string(name: 'suiteId',description: '' )
