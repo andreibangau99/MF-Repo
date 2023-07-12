@@ -28,7 +28,6 @@ pipeline{
                     script {
                           agentLabel = readFile('keywords.txt').trim()
                     }
-                    bat "echo ${agentLabel}"
                 }
                 
             }
