@@ -15,11 +15,9 @@
  */
 import fs from 'fs';
 import { getTestSuiteById
-} from './utils/octaneClient';
-import {
-    cleanUpWorkingFiles, getOctaneListNodesAsString, getTestNames,
-    TEST_RESULT_FILE
-} from './utils/files';
+} from './utils/octaneClient.js';
+import { getOctaneListNodesAsString
+} from './utils/files.js';
 import OctaneTestSuite from "./model/octane/octaneTestSuite";
 
 
