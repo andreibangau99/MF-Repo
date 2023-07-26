@@ -13,9 +13,7 @@ pipeline{
         string(name: 'suiteId',description: '' )
         string(name: 'suiteRunId',description: '' )
     }
-    environment {
-            AUTH_TOKEN = credentials('AndreiGithubCredentials')
-    }
+    
     stages {
 
         stage('setTag') {
