@@ -36,7 +36,7 @@ pipeline{
             }
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: '', usernameVariable: 'username', passwordVariable: 'password')]) {
+                    withCredentials([usernamePassword(credentialsId: 'ABangau', usernameVariable: 'username', passwordVariable: 'password')]) {
                         dir('test-execution') {
                             bat 'npm install'
                             bat 'npm run build'
