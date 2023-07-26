@@ -27,7 +27,7 @@ import {
     getAppModuleBySourceType,
     getAttachmentContentByName,
     getOctaneKDTByName
-} from '../utils/octaneClient';
+} from '../utils/octaneClient.js';
 import OctaneApplicationModule from '../model/octane/octaneApplicationModule';
 import OctaneTest from '../model/octane/octaneTest';
 import format from "dateformat";

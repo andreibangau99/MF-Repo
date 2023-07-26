@@ -19,7 +19,7 @@ import {
     deserializeSourceControlDetails, getAppModuleBySourceType,
     getJunitOctaneTestByName,
     validateOctaneJUnitTest
-} from '../utils/octaneClient';
+} from '../utils/octaneClient.js';
 import SourceControlProfile from '../model/silk/sourceControlProfile';
 import {
     cleanUpWorkingFiles,

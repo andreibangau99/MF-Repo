@@ -22,9 +22,9 @@ import {
     getNunitOctaneTestByName,
     getAppModuleBySourceType,
     validateOctaneTest
-} from '../utils/octaneClient';
+} from '../utils/octaneClient.js';
 import SourceControlProfile from '../model/silk/sourceControlProfile';
-import { getAbsoluteClasspath } from '../utils/classpath';
+import { getAbsoluteClasspath } from '../utils/classpath.js';
 import {
     cleanUpWorkingFiles,
     EXECUTABLE_FILE,
