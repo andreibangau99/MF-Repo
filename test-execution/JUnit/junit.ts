@@ -29,8 +29,8 @@ import {
     getRootWorkingFolder, getTestNames,
     replaceParametersReferences,
     replaceParamsValuesInJunitTest
-} from '../utils/files';
-import { getAbsoluteClasspath } from '../utils/classpath';
+} from '../utils/files.js';
+import { getAbsoluteClasspath } from '../utils/classpath.js';
 import OctaneApplicationModule from '../model/octane/octaneApplicationModule';
 import OctaneTest from '../model/octane/octaneTest';
 import format from "dateformat";
