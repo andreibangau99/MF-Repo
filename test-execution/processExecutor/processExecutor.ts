@@ -21,8 +21,8 @@ import {
     getTestNames,
     replaceParametersReferences,
     replaceParamsValuesInProcessExecutorTest
-} from '../utils/files';
-import {getAppModuleBySourceType, getOctaneProcessExecutorByName} from '../utils/octaneClient';
+} from '../utils/files.js';
+import {getAppModuleBySourceType, getOctaneProcessExecutorByName} from '../utils/octaneClient.js';
 import fs from 'fs';
 import OctaneTest from '../model/octane/octaneTest';
 import OctaneApplicationModule from '../model/octane/octaneApplicationModule';
