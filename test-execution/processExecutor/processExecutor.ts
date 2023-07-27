@@ -96,9 +96,9 @@ const getCommand = async (
     iterationIndex: number |undefined
 ): Promise<string> => {
     if (test.sc_working_folder_udf && path.isAbsolute(test.sc_working_folder_udf)) {
-        return `java -cp "${runnerJarPath}" com.microfocus.adm.almoctane.migration.plugin_silk_central.process.executor.ProcessExecutor "${test.sc_working_folder_udf}" ${test.name} ${timestamp} ${isLastIteration ?? ''} ${iterationIndex ?? ''} ${test.sc_executable_name_udf?.replace(/"/g, '\\"')} ${test.sc_argument_list_udf?.replace(/"/g, '\\"')}`;
+        return `java -cp "${runnerJarPath}" com.microfocus.adm.almoctane.migration.plugin_silk_central.process.executor.ProcessExecutor "${test.sc_working_folder_udf}" ${test.name} ${timestamp} ${isLastIteration ?? ''} ${iterationIndex ?? ''} ${test.sc_executable_name_udf?.replace(/"/g, '\\"')} "${test.sc_argument_list_udf?.replace(/"/g, '\\"')}"`;
     }
-    return `java -cp "${runnerJarPath}" com.microfocus.adm.almoctane.migration.plugin_silk_central.process.executor.ProcessExecutor null ${test.name} ${timestamp} ${isLastIteration ?? ''} ${iterationIndex ?? ''} ${test.sc_executable_name_udf?.replace(/"/g,'\\"')} ${test.sc_argument_list_udf?.replace(/"/g, '\\"')}`;
+    return `java -cp "${runnerJarPath}" com.microfocus.adm.almoctane.migration.plugin_silk_central.process.executor.ProcessExecutor null ${test.name} ${timestamp} ${isLastIteration ?? ''} ${iterationIndex ?? ''} ${test.sc_executable_name_udf?.replace(/"/g,'\\"')} "${test.sc_argument_list_udf?.replace(/"/g, '\\"')}"`;
 };
 
 const testsToRun = process.argv[2];
