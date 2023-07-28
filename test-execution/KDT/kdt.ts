@@ -20,7 +20,7 @@ import {
     getModifiedCSVBytes, getTestParameters,
     getRootWorkingFolder, getTestNames,
     replaceParametersReferences
-} from '../utils/files';
+} from '../utils/files.js';
 import fs from 'fs';
 import path from 'node:path';
 import {
