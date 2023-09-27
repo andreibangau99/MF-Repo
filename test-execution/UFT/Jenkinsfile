@@ -6,7 +6,7 @@ pipeline{
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
     }
     parameters {
-        string(name: 'testsToRun',description: 'D:\\from C\\shift builds\\Shift-4.1.15\\resources\\Silk Central automation\\test-execution\\octane-shift-execution-wrapper-4.42-SNAPSHOT.jar' )
+        string(name: 'testsToRun',description: '' )
         string(name: 'suiteId',description: '' )
         string(name: 'suiteRunId',description: '' )
         string(name: 'testsToRunConverted',description: '' )
