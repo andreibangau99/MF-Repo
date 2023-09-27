@@ -10,5 +10,5 @@ Get-Content -Path ./build/Props.txt
 Start-Process -FilePath "FTToolsLauncher.exe" -ArgumentList "-paramfile $PWD/build/Props.txt" -Wait *>&1
 $resultsContent = Get-Content -Path ./build/Results.xml
 $WORKSPACE_PATH = -join($WORKSPACE_ESCAPED, "\\test-execution\\");
-$newResultContent = $resultsContent -replace('/','\') -replace ($WORKSPACE_PATH, '') -replace ('file:\\\\\\', '')
+$newResultContent = $resultsContent -replace('/','\') -replace ($WORKSPACE_PATH, '') -replace ('file:\\\\\\', '') -replace ('<\\','</') -replace('<testsuites .* name=\"uftRunnerRoot\">','') -replace('</testsuites>','')
 $newResultContent | Set-Content -Path ./build/Results.xml
