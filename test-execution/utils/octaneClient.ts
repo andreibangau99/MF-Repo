@@ -85,7 +85,7 @@ const getUFTOctaneTestByName = async (
     const query = Query.field('name')
         .equal(testName)
         .and(Query.field('class_name').equal(className))
-        .and(Query.field('package').equal("FTToolsLauncher"))
+        .and(Query.field('package').equal(Query.NULL))
         .and(Query.field('component').equal(Query.NULL));
     const octaneResponse = await octane
         .get(Octane.entityTypes.tests)
