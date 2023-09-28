@@ -36,6 +36,9 @@ const createResources = async (
     if (!Array.isArray(mtbx.Mtbx.Test)) {
         array = new Array(array);
     }
+     if (fs.existsSync(ROOT_SOURCES_FOLDER)) {
+        fs.rmSync(ROOT_SOURCES_FOLDER, { recursive: true });
+    }
     fs.mkdirSync(ROOT_SOURCES_FOLDER);
     for (const test of array) {
         const testName = test._attributes.name
