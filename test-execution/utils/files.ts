@@ -485,7 +485,7 @@ const getTestParameters = async (
         test.sc_enable_data_driven_udf !== undefined &&
         test.sc_enable_data_driven_udf
     ) {
-        const iterations = await getCsvAsMapArray(
+        iterations = await getCsvAsMapArray(
             csvParametersAttachmentContent
         );
 
@@ -519,13 +519,10 @@ const getTestParameters = async (
 };
 
 const getTestNames = (testsToRun: string): string[] => {
-    const tests: string[] = testsToRun.split('||');
+    const tests: string[] = testsToRun.substring(testsToRun.indexOf("#")).split('+');
     const testNames: string[] = [];
     tests.forEach(test => {
-        const testProperties: string[] = test.split('|');
-        if (testProperties.length > 1) {
-            testNames.push(testProperties[0]);
-        }
+            testNames.push(test);
     });
     return testNames;
 };
