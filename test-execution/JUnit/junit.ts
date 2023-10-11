@@ -17,7 +17,7 @@ import fs from 'fs';
 import Credentials from '../model/credentials';
 import {
     deserializeSourceControlDetails, getAppModuleBySourceType,
-    getJunitOctaneTestByName,
+    getOctaneTestByName,
     validateOctaneJUnitTest
 } from '../utils/octaneClient.js';
 import SourceControlProfile from '../model/silk/sourceControlProfile';
@@ -35,6 +35,7 @@ import OctaneApplicationModule from '../model/octane/octaneApplicationModule';
 import OctaneTest from '../model/octane/octaneTest';
 import format from "dateformat";
 import path from "node:path";
+import {TestFields} from "../model/testFields.js";
 
 const getCommand = async (
     octaneTestName: string,
@@ -103,11 +104,11 @@ const createCommand = (
     let command;
     const dependenciesAbsolutePath = path.resolve('dependencies');
     if (!methodName && !classNames) {
-        command = `"${javaPath}" ${jvmOptions} -cp "${runnerJarPath};${dependenciesAbsolutePath}${path.sep}*;${absoluteClasspath}" ${paramsForCommand} com.microfocus.adm.almoctane.migration.plugin_silk_central.junit.JUnitCmdLineWrapper RunMeAsAJar null "${octaneTestName}" ${timestamp} ${isLastIteration ?? ''} ${iterationIndex ?? ''}`;
+        command = `"${javaPath}" ${jvmOptions} -cp "${runnerJarPath};${dependenciesAbsolutePath}${path.sep}com.borland.silk.keyworddriven.engine.jar;${dependenciesAbsolutePath}${path.sep}com.borland.silk.keyworddriven.jar;${absoluteClasspath}" ${paramsForCommand} com.microfocus.adm.almoctane.migration.plugin_silk_central.junit.JUnitCmdLineWrapper RunMeAsAJar null "${octaneTestName}" ${timestamp} ${isLastIteration ?? ''} ${iterationIndex ?? ''}`;
     } else if (!methodName && classNames && classNames.split(' ').length > 0) {
-        command = `"${javaPath}" ${jvmOptions} -cp "${runnerJarPath};${dependenciesAbsolutePath}${path.sep}*;${absoluteClasspath}" ${paramsForCommand} com.microfocus.adm.almoctane.migration.plugin_silk_central.junit.JUnitCmdLineWrapper "${classNames}" null "${octaneTestName}" ${timestamp} ${isLastIteration ?? ''} ${iterationIndex ?? ''}`;
+        command = `"${javaPath}" ${jvmOptions} -cp "${runnerJarPath};${dependenciesAbsolutePath}${path.sep}com.borland.silk.keyworddriven.engine.jar;${dependenciesAbsolutePath}${path.sep}com.borland.silk.keyworddriven.jar;${absoluteClasspath}" ${paramsForCommand} com.microfocus.adm.almoctane.migration.plugin_silk_central.junit.JUnitCmdLineWrapper "${classNames}" null "${octaneTestName}" ${timestamp} ${isLastIteration ?? ''} ${iterationIndex ?? ''}`;
     } else if (methodName && classNames && classNames.split(' ').length > 0) {
-        command = `"${javaPath}" ${jvmOptions} -cp "${runnerJarPath};${dependenciesAbsolutePath}${path.sep}*;${absoluteClasspath}" ${paramsForCommand} com.microfocus.adm.almoctane.migration.plugin_silk_central.junit.JUnitCmdLineWrapper "${classNames}" "${methodName}" "${octaneTestName}" ${timestamp} ${isLastIteration ?? ''} ${iterationIndex ?? ''}`;
+        command = `"${javaPath}" ${jvmOptions} -cp "${runnerJarPath};${dependenciesAbsolutePath}${path.sep}com.borland.silk.keyworddriven.engine.jar;${dependenciesAbsolutePath}${path.sep}com.borland.silk.keyworddriven.jar;${absoluteClasspath}" ${paramsForCommand} com.microfocus.adm.almoctane.migration.plugin_silk_central.junit.JUnitCmdLineWrapper "${classNames}" "${methodName}" "${octaneTestName}" ${timestamp} ${isLastIteration ?? ''} ${iterationIndex ?? ''}`;
     } else {
         throw new Error(
             'Could not create execution command for Octane automated test of type JUnit with name' +
@@ -130,7 +131,7 @@ const generateExecutableFile = async (
 
     const testNames: string[] = getTestNames(testsToRun);
     for (const testName of testNames) {
-        const test = await getJunitOctaneTestByName(testName);
+        const test = await getOctaneTestByName(testName, TestFields.JUnit);
         validateOctaneJUnitTest(test, testName);
 
         const testContainerAppModule: OctaneApplicationModule =
