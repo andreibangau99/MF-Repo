@@ -49,7 +49,7 @@ pipeline{
                                 bat 'echo Tests failed! Continue...'
                             }
                             bat 'call echo "deleting test source files..."'
-                            // bat 'rmdir test_sources /s /q'
+                            bat 'rmdir test_sources /s /q'
                         }
 
                     }
