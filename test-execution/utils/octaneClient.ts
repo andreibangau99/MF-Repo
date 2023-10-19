@@ -46,6 +46,7 @@ const getOctaneTestByName = async (
    testName = testName.replaceAll("\"", "\\\"").replaceAll("\^", "\\^").replaceAll("\'", "\\q")
         .replaceAll("{", "\\{").replaceAll("(", "\\(").replaceAll(")", "\\)")
         .replaceAll("[", "\\[").replaceAll("?", "\\?")
+    const query = Query.field('name')
         .equal(testName)
         .and(Query.field('class_name').equal(typeof className === 'undefined'? Query.NULL: className))
         .and(Query.field('package').equal(Query.NULL))
