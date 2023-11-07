@@ -37,6 +37,7 @@ pipeline{
                 label agentLabel
             }
             steps {
+                convertTestsToRun format:'', framework: 'junit'
                 script {
                     withCredentials([usernamePassword(credentialsId: 'PersonalGitHub', usernameVariable: 'github_user', passwordVariable: 'github_password')]) {
                         dir('test-execution') {
