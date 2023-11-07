@@ -519,13 +519,10 @@ const getTestParameters = async (
 };
 
 const getTestNames = (testsToRun: string): string[] => {
-    const tests: string[] = testsToRun.split('||');
+    const tests: string[] = testsToRun.substring(testsToRun.indexOf("#") + 1).split('+');
     const testNames: string[] = [];
     tests.forEach(test => {
-        const testProperties: string[] = test.split('|');
-        if (testProperties.length > 1) {
-            testNames.push(testProperties[0]);
-        }
+            testNames.push(test);
     });
     return testNames;
 };
