@@ -7,9 +7,9 @@ pipeline{
     }
     parameters {
         string(name: 'testsToRun',description: '' )
-        string(name: 'runnerJarPath', defaultValue: '', description: "")
-        string(name: 'nunit2',defaultValue: '',description: '' )
-        string(name: 'nunit3',defaultValue: '' )
+        string(name: 'runnerJarPath', defaultValue: 'C:\\dev\\shift\\silk-central-shift\\execution-wrapper\\target\\octane-shift-execution-wrapper-4.54-SNAPSHOT.jar', description: "")
+        string(name: 'nunit2',defaultValue: 'D:\\myFolder\\NUnit-2.7.1\\bin\\nunit-console.exe',description: '' )
+        string(name: 'nunit3',defaultValue: 'D:\\myFolder\\netcoreapp3.1\\Nunit\\nunit3-console.exe' )
         string(name: 'suiteId',description: '' )
         string(name: 'suiteRunId',description: '' )
     }
@@ -38,7 +38,7 @@ pipeline{
             }
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: '', usernameVariable: 'github_user', passwordVariable: 'github_password')]) {
+                    withCredentials([usernamePassword(credentialsId: 'PersonalGitHub', usernameVariable: 'github_user', passwordVariable: 'github_password')]) {
                         dir('test-execution') {
                             bat 'npm install'
                             bat 'npm run build'
@@ -50,8 +50,6 @@ pipeline{
                                 bat 'echo Tests failed! Continue...'
                             }
                             bat 'call java_command_to_execute.bat'
-                            bat 'call echo "deleting test source files..."'
-                            bat 'rmdir test_sources /s /q'
                         }
 
                     }
@@ -66,8 +64,16 @@ pipeline{
     }
     post {
         always {
-            cleanWs()
-        }
+             node(agentLabel) {
+                 dir('test-execution') {
+                     bat 'if exist test_sources rmdir test_sources /s /q'
+                     bat 'if exist testResults rmdir testResults /s /q'
+                     bat 'if exist command_to_execute.bat rmdir command_to_execute.bat /s /q'
+                     bat 'if exist java_command_to_execute.bat rmdir java_command_to_execute.bat /s /q'
+                 }
+             }
+             cleanWs()
+         }
         aborted {
             cleanWs()
             bat 'echo abort'
