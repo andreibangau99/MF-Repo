@@ -6,7 +6,7 @@ pipeline{
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
     }
     parameters {
-        string(name: 'testsToRun',description: '' )
+        string(name: 'testsToRunConverted',description: '' )
         string(name: 'runnerJarPath', defaultValue: 'C:\\dev\\shift\\silk-central-shift\\execution-wrapper\\target\\octane-shift-execution-wrapper-4.54-SNAPSHOT.jar', description: "")
         string(name: 'nunit2',defaultValue: 'D:\\myFolder\\NUnit-2.7.1\\bin\\nunit-console.exe',description: '' )
         string(name: 'nunit3',defaultValue: 'D:\\myFolder\\netcoreapp3.1\\Nunit\\nunit3-console.exe' )
