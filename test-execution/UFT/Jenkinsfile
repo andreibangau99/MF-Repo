@@ -9,7 +9,6 @@ pipeline{
         string(name: 'testsToRunConverted',description: '' )
         string(name: 'suiteId',description: '' )
         string(name: 'suiteRunId',description: '' )
-        string(name: 'testsToRunConverted',description: '' )
     }
 
     stages {
