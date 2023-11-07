@@ -65,14 +65,15 @@ pipeline{
     }
     post {
         always {
-             // node(agentLabel) {
-             //     dir('test-execution') {
-             //         bat 'if exist test_sources rmdir test_sources /s /q'
-             //         bat 'if exist testResults rmdir testResults /s /q'
-             //         bat 'if exist command_to_execute.bat del command_to_execute.bat'
-             //         bat 'if exist java_command_to_execute.bat del java_command_to_execute.bat'
-             //     }
-             // }
+             node(agentLabel) {
+                 // dir('test-execution') {
+                 //     bat 'if exist test_sources rmdir test_sources /s /q'
+                 //     bat 'if exist testResults rmdir testResults /s /q'
+                 //     bat 'if exist command_to_execute.bat del command_to_execute.bat'
+                 //     bat 'if exist java_command_to_execute.bat del java_command_to_execute.bat'
+                 // }
+                 cleanWs()
+             }
              cleanWs()
          }
         aborted {
