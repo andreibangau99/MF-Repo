@@ -37,7 +37,7 @@ pipeline{
                 label agentLabel
             }
             steps {
-                convertTestsToRun format:'', framework: 'junit'
+                convertTestsToRun format:'', framework: 'mvnSurefire'
                 script {
                     withCredentials([usernamePassword(credentialsId: 'PersonalGitHub', usernameVariable: 'github_user', passwordVariable: 'github_password')]) {
                         dir('test-execution') {
