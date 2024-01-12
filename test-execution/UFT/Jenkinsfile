@@ -38,7 +38,7 @@ pipeline{
             steps {
                 convertTestsToRun format:'', framework: 'uft'
                 script {
-                    withCredentials([usernamePassword(credentialsId: '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', usernameVariable: 'username', passwordVariable: 'password')]) {
+                    withCredentials([usernamePassword(credentialsId: 'ce04e494-cc7c-4bb0-b42b-3aa56bfd7ea7', usernameVariable: 'username', passwordVariable: 'password')]) {
                         dir('test-execution') {
                             bat 'npm install'
                             bat 'npm run build'
