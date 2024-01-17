@@ -17,8 +17,8 @@ import SourceControlProfile from './sourceControlProfile.js';
 import Credentials from '../credentials.js';
 import xml2js from 'xml2js';
 import fs from 'fs';
-import {encrypt} from '../../utils/files.js';
 import path from "path";
+import {encrypt} from "../../utils/security.js";
 
 export default class STWProfile extends SourceControlProfile {
     private _dbType: string;
@@ -121,7 +121,7 @@ export default class STWProfile extends SourceControlProfile {
         this._STWPassword = value;
     }
 
-    fetchResources(rootWorkingFolder: string, credentials?: Credentials): void {
+    fetchResources(credentials?: Credentials): void {
         const xmlBuilder = new xml2js.Builder();
         const STWDatabase = {
             TPDatabase: {
@@ -136,16 +136,20 @@ export default class STWProfile extends SourceControlProfile {
                 tpTPPwd: this.STWPassword
             }
         };
-        const STWDatabaseXML = xmlBuilder.buildObject(STWDatabase);
-        const STWDatabaseXMLEncrypted = encrypt(STWDatabaseXML);
+        const encryptionKey = [5, -21, 3, 5, -43, 9, 6, 127, 12, 64, 91, -31, -12, 77, 32, 17];
+        const encryptionAlgorithm = "des-ede-cbc";
 
+        const STWDatabaseXML = xmlBuilder.buildObject(STWDatabase);
+        const STWDatabaseXMLEncrypted = encrypt(STWDatabaseXML, encryptionAlgorithm, new Uint8Array(8), Buffer.from(encryptionKey));
+
+        fs.mkdirSync(this.getRootWorkingFolder(), {recursive: true});
         fs.writeFileSync(
-            `${rootWorkingFolder}/TP.xml`,
+            `${this.getRootWorkingFolder()}/TP.xml`,
             STWDatabaseXMLEncrypted
         );
     }
 
-    getAbsoluteWorkingFolderPath(rootWorkingFolder: string): string {
-       return path.resolve(rootWorkingFolder);
+    getAbsoluteWorkingFolderPath(): string {
+       return path.resolve(this.getRootWorkingFolder());
     }
 }
