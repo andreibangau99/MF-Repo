@@ -8,8 +8,8 @@ pipeline{
     parameters {
         string(name: 'testsToRun', description: '' )
         string(name: 'testsToRunConverted',description: '' )
-        string(name: 'nunit2',defaultValue: '',description: '' )
-        string(name: 'nunit3',defaultValue: '' )
+        string(name: 'nunit2',defaultValue: 'D:\\myFolder\\NUnit-2.7.1\\bin\\nunit-console.exe',description: '' )
+        string(name: 'nunit3',defaultValue: 'D:\\myFolder\\netcoreapp3.1\\Nunit\\nunit3-console.exe' )
         string(name: 'suiteId',description: '' )
         string(name: 'suiteRunId',description: '' )
     }
@@ -39,7 +39,7 @@ pipeline{
             steps {
                 convertTestsToRun format:'', framework: 'mvnSurefire'
                 script {
-                    withCredentials([usernamePassword(credentialsId: '', usernameVariable: 'username', passwordVariable: 'password')]) {
+                    withCredentials([usernamePassword(credentialsId: 'PersonalGitHub', usernameVariable: 'username', passwordVariable: 'password')]) {
                         dir('test-execution') {
                             bat 'npm install'
                             bat 'npm run build'
